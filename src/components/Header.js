@@ -1,7 +1,9 @@
 import React from 'react'
 import Image from 'next/image'
 import {LocationMarkerIcon, SearchIcon,ShoppingCartIcon,MenuIcon} from '@heroicons/react/outline'
+import { useSession, signIn, signOut } from "next-auth/react";
 function Header() {
+  const {data: session} = useSession();
   return (
   <header>
     <div className='flex items-center text-white bg-gray-900 p-1 space-x-4'>
@@ -30,8 +32,9 @@ function Header() {
         <img src="https://upload.wikimedia.org/wikipedia/en/thumb/4/41/Flag_of_India.svg/1200px-Flag_of_India.svg.png" alt="" width={40}/>
         <span>EN</span>
        </div>
-       <div className='link'>
-        <p className='text-xs'>Hello signin</p>
+       <div onClick={!session?signIn:signOut} className='link'>
+        <p className='text-xs'>{session ? `Hello ${session.user.name} 
+        signOut`:"Sign In"}</p>
         <p className='text-sm font-medium'>Accounts&Lists</p>
        </div>
        <div className='link'>
