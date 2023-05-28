@@ -3,6 +3,7 @@ import React from 'react'
 import Header from '../components/Header'
 import Banner from '../components/Banner';
 import ProductFeed from '../components/ProductFeed'
+
 function Home({data}) {
   return (
     <div>
@@ -12,7 +13,7 @@ function Home({data}) {
       </Head>
     {/* Header */}
     <Header/>
-    {/* main */}
+    {/* main */} 
     <main className='max-w-fit'>
       <Banner/>
       <ProductFeed products={data}/>

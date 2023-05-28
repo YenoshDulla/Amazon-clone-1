@@ -1,6 +1,9 @@
 import { StarIcon } from '@heroicons/react/solid'
 import Currency from 'react-currency-formatter';
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { addToCart } from '../slices/basketSlice';
+
 const MAX_RATIN = 5;
 const MIN_RATING = 3;
 function Product({id,title,price,description,category,image}) {
@@ -15,6 +18,18 @@ function Product({id,title,price,description,category,image}) {
     const [hasPrime] =useState(
         Math.floor(Math.random()<1)
     )
+    const dispatch = useDispatch()
+
+        const addItemsToCart = () => {
+            const Product ={
+                id,
+                title,
+                price,description,
+                category,
+                image
+            };
+            dispatch(addToCart(Product))
+        }
   return (
     <div  className='relative flex flex-col m-5 p-10 bg-white shadow-md'>
         <p className='absolute top-2 right-2 text-sm italic text-gray'>{category}</p>
@@ -35,7 +50,7 @@ function Product({id,title,price,description,category,image}) {
             </div>
             
         )}
-        <button className='mt-auto button'>Add to Cart</button>
+        <button onClick={addItemsToCart} className='mt-auto button'>Add to Cart</button>
     </div>
   )
 }
